@@ -1,6 +1,10 @@
 <app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
 
-<div class="container">
-  {{title}}
+<div class="container-fluid">
+  <div class="row" id="main">
+    <app-sidebar class="col-md-3"></app-sidebar>
+    <div class="col-md-9" id="dashboard">
+      <p>Main Content</p>
+    </div>
+  </div>
 </div>
