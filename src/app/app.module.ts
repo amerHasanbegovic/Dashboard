@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -25,10 +26,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
     LineChartComponent,
     PieChartComponent,
   ],
-  imports: [
-    BrowserModule, 
-    RouterModule.forRoot(appRoutes)
-  ],
+  imports: [BrowserModule, RouterModule.forRoot(appRoutes), ChartsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
