@@ -6,6 +6,7 @@ const sample_servers = [
   { Id: 2, Name: 'dev-mail', IsOnline: false },
   { Id: 3, Name: 'prod-web', IsOnline: false },
   { Id: 4, Name: 'prod-mail', IsOnline: true },
+  { Id: 5, Name: 'prod', IsOnline: true },
 ];
 @Component({
   selector: 'app-health',

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Server } from '../shared/server';
 
 @Component({
   selector: 'app-server',
@@ -9,6 +10,7 @@ export class ServerComponent implements OnInit {
 
   constructor() { }
 
+  @Input() serverInput: Server;
   ngOnInit(): void {
   }
 
