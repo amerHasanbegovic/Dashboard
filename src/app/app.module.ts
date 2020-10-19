@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 
@@ -30,7 +31,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     ServerComponent,
     PaginationComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes), ChartsModule],
+  imports: [BrowserModule, RouterModule.forRoot(appRoutes), ChartsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
