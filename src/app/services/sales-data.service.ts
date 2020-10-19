@@ -8,7 +8,7 @@ export class SalesDataService {
 
   getOrders = (pageNum: number, pageSize: number) => {
     return this._http
-      .get('http://localhost:5000/api/order/' + pageNum + '/' + pageSize)
+      .get('http://localhost:5001/api/order/' + pageNum + '/' + pageSize)
       .pipe(
         map(
           (res: any) => res.json(),
@@ -19,7 +19,7 @@ export class SalesDataService {
 
   getOrdersByCustomer = (n: number) => {
     return this._http
-      .get('http://localhost:5000/api/order/bycustomer/' + n)
+      .get('http://localhost:5001/api/order/bycustomer/' + n)
       .pipe(
         map((res: any) => res.json()),
         catchError((err) => err.Message())
@@ -27,7 +27,7 @@ export class SalesDataService {
   };
 
   getOrdersByState = () => {
-    return this._http.get('http://localhost:5000/api/order/bystate/').pipe(
+    return this._http.get('http://localhost:5001/api/order/bystate/').pipe(
       map((res: any) => res.json()),
       catchError((err) => err.Message())
     );
