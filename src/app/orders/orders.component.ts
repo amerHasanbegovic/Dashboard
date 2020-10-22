@@ -16,10 +16,13 @@ export class OrdersComponent implements OnInit {
   limit = 10;
   loading = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getOrders();
+  }
 
   getOrders = () => {
-    this._salesData.getOrders(this.page, this.limit).subscribe((res) => {
+    this._salesData.getOrders(this.page, this.limit)
+    .subscribe(res => {
       console.log('results from GetOrders', res);
       this.orders = res['page']['data'];
       this.total = res['page'].total;

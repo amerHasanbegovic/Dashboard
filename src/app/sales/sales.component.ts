@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SalesDataService } from '../services/sales-data.service';
 
 @Component({
@@ -6,9 +6,10 @@ import { SalesDataService } from '../services/sales-data.service';
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.css'],
 })
+
 export class SalesComponent implements OnInit {
-  salesDataByCustomer: any;
-  salesDataByState: any;
+  @Input() salesDataByCustomer: any;
+  @Input() salesDataByState: any;
 
   constructor(private _salesDataService: SalesDataService) {}
 

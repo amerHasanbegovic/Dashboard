@@ -8,28 +8,19 @@ export class SalesDataService {
 
   getOrders = (pageNum: number, pageSize: number) => {
     return this._http
-      .get('http://localhost:5001/api/order/' + pageNum + '/' + pageSize)
-      .pipe(
-        map(
-          (res: any) => res.json(),
-          catchError((err) => err.Message())
-        )
-      );
+      .get('http://localhost:5000/api/order/' + pageNum + '/' + pageSize)
+      .pipe(map((res) => res), catchError(err => err));
   };
 
   getOrdersByCustomer = (n: number) => {
     return this._http
-      .get('http://localhost:5001/api/order/bycustomer/' + n)
-      .pipe(
-        map((res: any) => res.json()),
-        catchError((err) => err.Message())
-      );
+      .get('http://localhost:5000/api/order/bycustomer/' + n)
+      .pipe(map((res) => res), catchError(err => err));
   };
 
   getOrdersByState = () => {
-    return this._http.get('http://localhost:5001/api/order/bystate/').pipe(
-      map((res: any) => res.json()),
-      catchError((err) => err.Message())
-    );
+    return this._http
+      .get('http://localhost:5000/api/order/bystate/')
+      .pipe(map((res) => res), catchError(err => err));
   };
 }
