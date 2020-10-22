@@ -29,4 +29,18 @@ export class OrdersComponent implements OnInit {
       this.loading = false;
     });
   };
+
+  GoToPrevious = () => {
+    this.page --; //if(page == 1) button is disabled
+    this.getOrders()
+  }
+  GoToNext = () => {
+    this.page++;
+    this.getOrders();
+  }
+
+  GoToPage = (n: number) => {
+    this.page = n;
+    this.getOrders();
+  }
 }

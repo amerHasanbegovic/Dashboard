@@ -1,1 +1,11 @@
-<p>pagination works!</p>
+<div class="pages">
+    <span class="page-counts">X through Y pages</span>
+    <span class="page-total">{{TotalPages()}} total pages</span>
+    <button class="btn btn-sm btn-light" (click)="OnPrev()">
+        Previous
+    </button>
+    <b>...</b>
+    <button class="btn btn-sm btn-light" (click)="OnNext()">
+        Next
+    </button>
+</div>
