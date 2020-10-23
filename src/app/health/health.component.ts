@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Server } from '../shared/server';
 
-const sample_servers = [
-  { Id: 1, Name: 'dev-web', IsOnline: true },
-  { Id: 2, Name: 'dev-mail', IsOnline: false },
-  { Id: 3, Name: 'prod-web', IsOnline: false },
-  { Id: 4, Name: 'prod-mail', IsOnline: true },
-  { Id: 5, Name: 'prod', IsOnline: true },
-];
+// const sample_servers = [
+//   { Id: 1, Name: 'dev-web', IsOnline: true },
+//   { Id: 2, Name: 'dev-mail', IsOnline: false },
+//   { Id: 3, Name: 'prod-web', IsOnline: false },
+//   { Id: 4, Name: 'prod-mail', IsOnline: true },
+//   { Id: 5, Name: 'prod', IsOnline: true },
+// ];
+
 @Component({
   selector: 'app-health',
   templateUrl: './health.component.html',
@@ -16,6 +17,6 @@ const sample_servers = [
 export class HealthComponent implements OnInit {
   constructor() {}
 
-  servers: Server[] = sample_servers;
+  servers: Server[];
   ngOnInit(): void {}
 }

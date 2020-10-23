@@ -17,6 +17,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ServerComponent } from './server/server.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SalesDataService } from './services/sales-data.service';
+import { ServerService } from './services/server.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { SalesDataService } from './services/sales-data.service';
     PaginationComponent,
   ],
   imports: [BrowserModule, RouterModule.forRoot(appRoutes), ChartsModule, HttpClientModule],
-  providers: [SalesDataService],
+  providers: [SalesDataService, ServerService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
