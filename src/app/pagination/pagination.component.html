@@ -1,11 +1,16 @@
 <div class="pages">
-    <span class="page-counts">X through Y pages</span>
-    <span class="page-total">{{TotalPages()}} total pages</span>
-    <button class="btn btn-sm btn-light" (click)="OnPrev()">
-        Previous
-    </button>
-    <b>...</b>
-    <button class="btn btn-sm btn-light" (click)="OnNext()">
-        Next
-    </button>
+    <span class="page-counts">{{GetCurrentResultsCount()}} of {{count}}</span>
+    <span class="page-total float-right">{{TotalPages()}} total pages</span>
+    <div class="pagination" *ngIf="count > 0">
+        <button class="btn btn-sm btn-light" (click)="OnPrev()" [disabled]="page === 1 || loading"
+            [ngClass]="{'disabled': page === 1 || loading}">
+            Previous
+        </button>
+        <button class="btn btn-sm btn-light btn-pageNum" *ngFor="let pageNum of GetPages()" (click)="OnPage(pageNum)"
+            [ngClass]="{'active': pageNum === page, 'disabled': loading}">{{pageNum}}</button>
+        <button class="btn btn-sm btn-light" (click)="OnNext()" [disabled]="IsLastPage() || loading"
+            [ngClass]="{'disabled': LastPage || loading}">
+            Next
+        </button>
+    </div>
 </div>
