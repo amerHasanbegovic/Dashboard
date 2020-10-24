@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Server } from '../shared/server';
+import { ServerService } from '../services/server.service';
+import { Observable } from 'rxjs';
+import { timer } from 'rxjs';
 
 // const sample_servers = [
 //   { Id: 1, Name: 'dev-web', IsOnline: true },
@@ -14,9 +17,35 @@ import { Server } from '../shared/server';
   templateUrl: './health.component.html',
   styleUrls: ['./health.component.css'],
 })
-export class HealthComponent implements OnInit {
-  constructor() {}
+export class HealthComponent implements OnInit, OnDestroy{
+  constructor(private _serverService : ServerService) {}
 
-  servers: Server[];
-  ngOnInit(): void {}
+  servers: Server[]; 
+  timerSubscription: any;
+
+  ngOnInit(): void {
+    this.RefreshData();
+    this._serverService.getServers().subscribe(res => {
+      console.log(res);
+      this.servers = res;
+    });
+  }
+
+  ngOnDestroy(){
+    if(this.timerSubscription){
+        this.timerSubscription.unsubscribe();
+    }
+  }
+
+  RefreshData() {
+    this._serverService.getServers().subscribe(res => {
+      this.servers = res;
+    });
+    this.SubscribedToData();
+  }
+
+  SubscribedToData() {
+    const time = timer(5000)
+    this.timerSubscription = time.subscribe(() => this.RefreshData());
+  }
 }

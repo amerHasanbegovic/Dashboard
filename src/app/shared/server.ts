@@ -1,5 +1,5 @@
 export interface Server{
-    Id: number,
-    Name: string,
-    IsOnline: boolean,
+    id: number,
+    name: string,
+    isOnline: boolean,
 }

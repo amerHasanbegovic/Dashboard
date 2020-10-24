@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Server } from '../shared/server';
+import { ServerMessage } from '../shared/server-message';
 
 @Component({
   selector: 'app-server',
@@ -11,24 +12,55 @@ export class ServerComponent implements OnInit {
 
   color: string;
   buttonText: string;
+  isLoading: boolean;
+  serverStatus: string;
 
   @Input() serverInput: Server;
+  @Output() serverAction = new EventEmitter<ServerMessage>();
+
   ngOnInit(): void {
-    this.SetServerStatus(this.serverInput.IsOnline);
+    this.SetServerStatus(this.serverInput.isOnline);
+    console.log(this.serverInput);
   }
 
-  SetServerStatus = (isOnline: boolean) => {
+  SetServerStatus(isOnline: boolean) {
     if (isOnline) {
-      this.serverInput.IsOnline = true;
+      this.serverInput.isOnline = true;
+      this.serverStatus = 'Online';
       this.color = '#66BB6A';
       this.buttonText = 'Shut Down';
     } else {
-      this.serverInput.IsOnline = false;
+      this.serverInput.isOnline = false;
+      this.serverStatus = 'Offline';
       this.color = '#FF6B6B';
       this.buttonText = 'Start';
     }
   };
-  ToggleStatus = (onlineStatus: boolean) => {
-    this.SetServerStatus(!onlineStatus);
-  };
+
+  MakeLoading() {
+    this.color = '#FFCA28';
+    this.buttonText = 'Pending..';
+    this.isLoading = true;
+    this.serverStatus = 'Loading';
+  }
+
+  SendServerAction(isOnline: boolean) {
+    this.MakeLoading();
+    const payload = this.BuildPayload(isOnline);
+    this.serverAction.emit(payload);
+  }
+
+  BuildPayload(isOnline: boolean): ServerMessage {
+    if (isOnline) {
+      return {
+        id: this.serverInput.id,
+        payload: 'deactivate',
+      };
+    } else {
+      return {
+        id: this.serverInput.id,
+        payload: 'activate',
+      };
+    }
+  }
 }
