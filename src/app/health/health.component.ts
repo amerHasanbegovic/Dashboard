@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Server } from '../shared/server';
 import { ServerService } from '../services/server.service';
-import { Observable } from 'rxjs';
 import { timer } from 'rxjs';
+import { ServerMessage } from '../shared/server-message';
 
 // const sample_servers = [
 //   { Id: 1, Name: 'dev-web', IsOnline: true },
@@ -17,35 +17,39 @@ import { timer } from 'rxjs';
   templateUrl: './health.component.html',
   styleUrls: ['./health.component.css'],
 })
-export class HealthComponent implements OnInit, OnDestroy{
-  constructor(private _serverService : ServerService) {}
+export class HealthComponent implements OnInit, OnDestroy {
+  constructor(private _serverService: ServerService) {}
 
-  servers: Server[]; 
+  servers: Server[];
   timerSubscription: any;
 
   ngOnInit(): void {
     this.RefreshData();
-    this._serverService.getServers().subscribe(res => {
-      console.log(res);
+    this._serverService.getServers().subscribe((res) => {
       this.servers = res;
     });
   }
 
-  ngOnDestroy(){
-    if(this.timerSubscription){
-        this.timerSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
     }
   }
 
   RefreshData() {
-    this._serverService.getServers().subscribe(res => {
+    this._serverService.getServers().subscribe((res) => {
       this.servers = res;
     });
     this.SubscribedToData();
   }
 
   SubscribedToData() {
-    const time = timer(5000)
+    const time = timer(5000);
     this.timerSubscription = time.subscribe(() => this.RefreshData());
+  }
+
+  SendMessage(msg: ServerMessage){
+    this._serverService.HandleServerMessage(msg)
+    .subscribe(res => console.log("Message sent!", res), err => console.log(err));
   }
 }

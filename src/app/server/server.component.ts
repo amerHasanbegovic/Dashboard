@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ServerService } from '../services/server.service';
 import { Server } from '../shared/server';
 import { ServerMessage } from '../shared/server-message';
 
@@ -8,7 +9,7 @@ import { ServerMessage } from '../shared/server-message';
   styleUrls: ['./server.component.css'],
 })
 export class ServerComponent implements OnInit {
-  constructor() {}
+  constructor(private _serverService: ServerService) {}
 
   color: string;
   buttonText: string;
@@ -20,7 +21,6 @@ export class ServerComponent implements OnInit {
 
   ngOnInit(): void {
     this.SetServerStatus(this.serverInput.isOnline);
-    console.log(this.serverInput);
   }
 
   SetServerStatus(isOnline: boolean) {
